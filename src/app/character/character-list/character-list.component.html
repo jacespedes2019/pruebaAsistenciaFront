@@ -1,13 +1,16 @@
 <app-barra></app-barra>
-<div class="form-container">
-  <form #searchForm="ngForm" class="search-form">
-    <mat-form-field class="search-field">
-      <mat-label>Search by name</mat-label>
-      <input matInput [(ngModel)]="searchTerm" [ngModelOptions]="{standalone: true}">
-    </mat-form-field>
-    <button mat-raised-button color="primary" class="action-button" (click)="search()">Search</button>
-    <button mat-raised-button color="warn" class="action-button" (click)="resetForm(searchForm)">Reset</button>
-  </form>
+<div class="title-section">
+  <div class="section-title">Characters</div>
+  <div class="form-container">
+    <form #searchForm="ngForm" class="search-form">
+      <mat-form-field class="search-field">
+        <mat-label>Search by name</mat-label>
+        <input matInput [(ngModel)]="searchTerm" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="action-button" (click)="search()">Search</button>
+      <button mat-raised-button color="warn" class="action-button" (click)="resetForm(searchForm)">Reset</button>
+    </form>
+  </div>
 </div>
 
 <!-- Contenedor flex para mostrar los personajes en línea -->
