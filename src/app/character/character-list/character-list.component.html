@@ -1,0 +1,38 @@
+<app-barra></app-barra>
+<div class="form-container">
+  <form #searchForm="ngForm" class="search-form">
+    <mat-form-field class="search-field">
+      <mat-label>Search by name</mat-label>
+      <input matInput [(ngModel)]="searchTerm" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="action-button" (click)="search()">Search</button>
+    <button mat-raised-button color="warn" class="action-button" (click)="resetForm(searchForm)">Reset</button>
+  </form>
+</div>
+
+<!-- Contenedor flex para mostrar los personajes en línea -->
+<div class="characters-container">
+  <!-- Itera sobre los personajes y aplica el filtro si hay un término de búsqueda -->
+  <mat-card *ngFor="let character of paginatedCharacters" class="character-card">
+    <img [src]="character.image" alt="{{ character.name }}" class="character-image">
+    <h2>{{ character.name }}</h2>
+    <p><strong>Status:</strong> {{ character.status }}</p>
+    <p><strong>Species:</strong> {{ character.species }}</p>
+    <p><strong>Gender:</strong> {{ character.gender }}</p>
+    <p><strong>Origin:</strong> {{ character.origin.name }}</p>
+    <p><strong>Location:</strong> {{ character.location.name }}</p>
+    
+    <!-- Resto de las propiedades -->
+
+    <h3>Episodes:</h3>
+    <select>
+      <option *ngFor="let episode of character.episode" [value]="episode">
+        Episode Link {{ episode.split('/').pop() }}
+      </option>
+    </select>
+  </mat-card>
+
+  <!-- Agrega el paginador -->
+<mat-paginator [length]="characters.length" [pageSize]="pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="[25, 50, 100]" (page)="onPageChange($event)"></mat-paginator>
+</div>
+
