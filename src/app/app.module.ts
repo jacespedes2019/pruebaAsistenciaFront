@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { BarraModule } from './barra/barra.module';
+import { EpisodeModule } from './episode/episode.module';
 
 @NgModule({
   declarations: [	
@@ -21,6 +22,7 @@ import { BarraModule } from './barra/barra.module';
     BrowserAnimationsModule,
     HttpClientModule,
     BarraModule,
+    EpisodeModule
   ],
   providers: [
     provideClientHydration()

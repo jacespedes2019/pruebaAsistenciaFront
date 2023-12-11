@@ -53,5 +53,16 @@ export class CharacterService {
     }
     }
 
-    
+    getCharactersByUrlList(urls: string[]): Observable<Character[]> {
+  
+      const requests: Observable<Character[]>[] = [];
+  
+      for (const url of urls) {
+        const request = this.http.get<Character>(url).pipe(map((res) => [res]));
+        requests.push(request);
+      }
+  
+      return forkJoin(requests).pipe(map((characterArrays) => ([] as Character[]).concat(...characterArrays)));
+    }
+  
 }

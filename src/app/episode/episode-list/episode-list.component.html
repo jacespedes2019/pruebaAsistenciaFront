@@ -1,0 +1,40 @@
+<app-barra></app-barra>
+<div class="title-section">
+  <div class="section-title">Episodes</div>
+  <div class="form-container">
+    <form #searchForm="ngForm" class="search-form">
+      <mat-form-field class="search-field">
+        <mat-label>Search by name</mat-label>
+        <input matInput [(ngModel)]="searchTerm" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="action-button" (click)="search()">Search</button>
+      <button mat-raised-button color="warn" class="action-button" (click)="resetForm(searchForm)">Reset</button>
+    </form>
+  </div>
+</div>
+
+<!-- Contenedor flex para mostrar los personajes en línea -->
+<div class="episodes-container">
+  <!-- Itera sobre los personajes y aplica el filtro si hay un término de búsqueda -->
+  <mat-card *ngFor="let episode of paginatedEpisodes" class="episode-card">
+    <h2><a [href]="'/episode/' + episode.id">{{ episode.name }}</a></h2>
+    <p><strong>Air date:</strong> {{ episode.air_date }}</p>
+    <p><strong>Episode number:</strong> {{ episode.episode }}</p>
+    <p><strong>Created:</strong> {{ episode.created }}</p>
+    
+    <!-- Resto de las propiedades
+
+    <h3>Characters:</h3>
+    <select>
+      <option *ngFor="let character of episode.characters" [value]="episode">
+        {{ character.name}}
+      </option>
+    </select>  -->
+  </mat-card>
+
+</div>
+<div class="episodes-container">
+ <!-- Agrega el paginador -->
+  <mat-paginator [length]="episodesNoCha.length" [pageSize]="pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="[25, 50, 100]" (page)="onPageChange($event)"></mat-paginator>
+</div>
+
