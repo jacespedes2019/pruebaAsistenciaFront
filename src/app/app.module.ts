@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { BarraModule } from './barra/barra.module';
 import { EpisodeModule } from './episode/episode.module';
+import { LocationModule } from './location/location.module';
 
 @NgModule({
   declarations: [	
@@ -22,7 +23,8 @@ import { EpisodeModule } from './episode/episode.module';
     BrowserAnimationsModule,
     HttpClientModule,
     BarraModule,
-    EpisodeModule
+    EpisodeModule,
+    LocationModule
   ],
   providers: [
     provideClientHydration()

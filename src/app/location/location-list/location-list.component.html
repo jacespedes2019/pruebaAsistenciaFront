@@ -1,0 +1,40 @@
+<app-barra></app-barra>
+<div class="title-section">
+  <div class="section-title">Locations</div>
+  <div class="form-container">
+    <form #searchForm="ngForm" class="search-form">
+      <mat-form-field class="search-field">
+        <mat-label>Search by name</mat-label>
+        <input matInput [(ngModel)]="searchTerm" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="action-button" (click)="search()">Search</button>
+      <button mat-raised-button color="warn" class="action-button" (click)="resetForm(searchForm)">Reset</button>
+    </form>
+  </div>
+</div>
+
+<!-- Contenedor flex para mostrar los personajes en línea -->
+<div class="locations-container">
+  <!-- Itera sobre los personajes y aplica el filtro si hay un término de búsqueda -->
+  <mat-card *ngFor="let location of paginatedLocations" class="location-card">
+    <h2><a [href]="'/location/' + location.id">{{ location.name }}</a></h2>
+    <p><strong>Type:</strong> {{ location.type }}</p>
+    <p><strong>Dimension:</strong> {{ location.dimension }}</p>
+    <p><strong>Created:</strong> {{ location.created }}</p>
+    
+    <!-- Resto de las propiedades
+
+    <h3>Characters:</h3>
+    <select>
+      <option *ngFor="let character of location.characters" [value]="location">
+        {{ character.name}}
+      </option>
+    </select>  -->
+  </mat-card>
+
+</div>
+<div class="locations-container">
+ <!-- Agrega el paginador -->
+  <mat-paginator [length]="locations.length" [pageSize]="pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="[25, 50, 100]" (page)="onPageChange($event)"></mat-paginator>
+</div>
+

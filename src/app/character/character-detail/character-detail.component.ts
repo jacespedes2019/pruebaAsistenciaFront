@@ -74,4 +74,14 @@ export class CharacterDetailComponent implements OnInit {
     // Maneja los cambios de página
     this.paginateEpisodes();
   }
+
+  getLocationId(url:string){
+    // Dividir la URL por el carácter '/'
+    const segments = url.split('/');
+
+    // Obtener el último segmento
+    const lastSegment = segments[segments.length - 1];
+
+    return Number(lastSegment);
+  }
 }

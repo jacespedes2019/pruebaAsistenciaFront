@@ -8,8 +8,8 @@
     <p><strong>Species:</strong> {{ character.species }}</p>
     <p><strong>Type:</strong> {{ character.type }}</p>
     <p><strong>Gender:</strong> {{ character.gender }}</p>
-    <p><strong>Origin:</strong> {{ character.origin.name }}</p>
-    <p><strong>Location:</strong> {{ character.location.name }}</p>
+    <p><strong>Origin:</strong> <a [href]="'/location/' + getLocationId(character.origin.url)">{{ character.origin.name }}</a></p>
+    <p><strong>Location:</strong> <a [href]="'/location/' + getLocationId(character.location.url)">{{ character.location.name }}</a></p>
     <p class="created-info">Created: {{ character.created }}</p>
     <!-- Agrega otras propiedades según sea necesario -->
   </div>

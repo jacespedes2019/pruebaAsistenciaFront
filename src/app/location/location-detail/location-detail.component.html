@@ -1,0 +1,30 @@
+<app-barra></app-barra>
+<div class="location-details" *ngIf="location">
+  <h2>Location name: {{ location.name }}</h2>
+  <p><strong>Type:</strong> {{ location.type }}</p>
+  <p><strong>Dimension:</strong> {{ location.dimension }}</p>
+  <p><strong>Created:</strong> {{ location.created }}</p>
+</div>
+
+<div class="title-section">
+  <div class="section-title">Residents</div>
+</div>
+
+<!-- Contenedor flex para mostrar los personajes en línea -->
+<div class="characters-container">
+  <!-- Itera sobre los personajes y aplica el filtro si hay un término de búsqueda -->
+  <mat-card *ngFor="let character of paginatedCharacters" class="character-card">
+    <img [src]="character.image" alt="{{ character.name }}" class="character-image">
+    <h2 class="title-card"><a [href]="'/character/' + character.id">{{ character.name }}</a></h2>
+    <p><strong>Status:</strong> {{ character.status }}</p>
+    <p><strong>Species:</strong> {{ character.species }}</p>
+    <p><strong>Gender:</strong> {{ character.gender }}</p>
+    <p><strong>Origin:</strong> {{ character.origin.name }}</p>
+    <p><strong>Location:</strong> {{ character.location.name }}</p>
+  </mat-card>
+
+  <!-- Agrega el paginador -->
+</div>
+<div class="characters-container">
+  <mat-paginator [length]="characters.length" [pageSize]="pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="[5, 10, 15]" (page)="onPageChange($event)"></mat-paginator>
+</div>
