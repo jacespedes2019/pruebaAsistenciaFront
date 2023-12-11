@@ -10,6 +10,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BarraModule } from '../barra/barra.module';
+import { CharacterDetailComponent } from './character-detail/character-detail.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import { BarraModule } from '../barra/barra.module';
     MatInputModule,
     BarraModule
   ],
-  declarations: [CharacterListComponent],
-  exports: [CharacterListComponent]
+  declarations: [CharacterListComponent, CharacterDetailComponent],
+  exports: [CharacterListComponent, CharacterDetailComponent]
 })
 export class CharacterModule { }

@@ -64,5 +64,11 @@ export class CharacterService {
   
       return forkJoin(requests).pipe(map((characterArrays) => ([] as Character[]).concat(...characterArrays)));
     }
+
+      // Método para obtener un episodio por ID desde la ruta
+    getCharacterById(id: number): Observable<Character> {
+    // Hacer la solicitud HTTP para obtener el episodio específico
+      return this.http.get<Character>(`${this.apiUrl}/${id}`);
+  }
   
 }

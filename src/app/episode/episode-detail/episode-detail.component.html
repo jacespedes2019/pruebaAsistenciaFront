@@ -15,7 +15,7 @@
   <!-- Itera sobre los personajes y aplica el filtro si hay un término de búsqueda -->
   <mat-card *ngFor="let character of paginatedCharacters" class="character-card">
     <img [src]="character.image" alt="{{ character.name }}" class="character-image">
-    <h2>{{ character.name }}</h2>
+    <h2 class="title-card"><a [href]="'/character/' + character.id">{{ character.name }}</a></h2>
     <p><strong>Status:</strong> {{ character.status }}</p>
     <p><strong>Species:</strong> {{ character.species }}</p>
     <p><strong>Gender:</strong> {{ character.gender }}</p>

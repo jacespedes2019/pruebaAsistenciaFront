@@ -1,27 +1,28 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Character } from '../../character/character';
-import { MatPaginator } from '@angular/material/paginator';
-import { EpisodeService } from '../episode.service';
-import { CharacterService } from '../../character/character.service';
-import { EpisodeNoCha } from '../episodeNoCharacters';
+import { Character } from '../character';
+import { EpisodeNoCha } from '../../episode/episodeNoCharacters';
 import { ActivatedRoute } from '@angular/router';
+import { EpisodeService } from '../../episode/episode.service';
+import { CharacterService } from '../character.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
-  selector: 'app-episode-detail',
-  templateUrl: './episode-detail.component.html',
-  styleUrls: ['./episode-detail.component.sass']
+  selector: 'app-character-detail',
+  templateUrl: './character-detail.component.html',
+  styleUrls: ['./character-detail.component.sass']
 })
-export class EpisodeDetailComponent implements OnInit {
+export class CharacterDetailComponent implements OnInit {
 
-  characters: Character[] = [];
-  episodeNoCha!: EpisodeNoCha;
-  paginatedCharacters: Character[] = [];
+  character!: Character;
+  episodes: EpisodeNoCha[] = [];
+  paginatedEpisodes: EpisodeNoCha[] = [];
 
   // Define el tamaño de la página y las opciones de tamaño de la página
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 15];
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -31,49 +32,46 @@ export class EpisodeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     // Obtiene el ID del episodio desde la ruta
-    const episodeId = this.route.snapshot.paramMap.get('id');
+    const chaId = this.route.snapshot.paramMap.get('id');
     
-    if (episodeId) {
+    if (chaId) {
       // Llama al servicio para obtener detalles del episodio
-      this.episodeService.getEpisodeById(Number(episodeId)).subscribe((episodeNoCha) => {
-        this.episodeNoCha = episodeNoCha;
+      this.characterService.getCharacterById(Number(chaId)).subscribe((character) => {
+        this.character = character;
         // Obtén los personajes asociados al episodio
-        this.obtainCharacters();
-        this.paginateCharacters();
+        this.obtainEpisodes();
       });
     }
   }
 
-  obtainCharacters() {
-    this.characterService.getCharactersByUrlList(this.episodeNoCha.characters).subscribe((data) => {
+  obtainEpisodes() {
+    this.episodeService.getEpisodesByUrlList(this.character.episode).subscribe((data) => {
     // Aquí, data es la lista de personajes obtenidos para el episodio actual
-    this.characters = data;
+    this.episodes = data;
+    this.paginateEpisodes();
       });
   }
-
-  paginateCharacters() {
+  
+  paginateEpisodes() {
     if (this.paginator && this.paginator.pageSize) {
       console.log('Sirvio');
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       const endIndex = startIndex + this.paginator.pageSize;
       console.log(this.paginator.pageIndex);
-      this.paginatedCharacters = this.characters.slice(startIndex, endIndex);
+      this.paginatedEpisodes = this.episodes.slice(startIndex, endIndex);
     }
     else if (this.paginator) {
       console.log('Sirvio');
       const startIndex = this.paginator.pageIndex * this.pageSize;
       const endIndex = startIndex + this.pageSize;
       console.log(this.paginator.pageIndex);
-      this.paginatedCharacters = this.characters.slice(startIndex, endIndex);
+      this.paginatedEpisodes = this.episodes.slice(startIndex, endIndex);
     }
   }
 
   onPageChange(event: any) {
     console.log('Entró 2');
     // Maneja los cambios de página
-    this.paginateCharacters();
+    this.paginateEpisodes();
   }
-
-
-
 }

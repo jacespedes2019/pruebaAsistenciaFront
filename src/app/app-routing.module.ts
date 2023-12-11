@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CharacterListComponent } from './character/character-list/character-list.component';
 import { EpisodeListComponent } from './episode/episode-list/episode-list.component';
 import { EpisodeDetailComponent } from './episode/episode-detail/episode-detail.component';
+import { CharacterDetailComponent } from './character/character-detail/character-detail.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,15 @@ const routes: Routes = [
       {
         path:":id",
         component: EpisodeDetailComponent
+      }
+    ]
+  },
+  {
+    path:"character",
+    children:[
+      {
+        path:":id",
+        component: CharacterDetailComponent
       }
     ]
   },

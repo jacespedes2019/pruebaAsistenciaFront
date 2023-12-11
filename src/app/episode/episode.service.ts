@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Episode } from './episode';
 import { Observable } from 'rxjs';
 import { map, expand, pluck, toArray, concatMap  } from 'rxjs/operators';
 import { of, forkJoin, mergeMap  } from 'rxjs';
@@ -59,6 +58,18 @@ export class EpisodeService {
   getEpisodeById(id: number): Observable<EpisodeNoCha> {
     // Hacer la solicitud HTTP para obtener el episodio específico
     return this.http.get<EpisodeNoCha>(`${this.apiUrl}/${id}`);
+  }
+
+  getEpisodesByUrlList(urls: string[]): Observable<EpisodeNoCha[]> {
+  
+    const requests: Observable<EpisodeNoCha[]>[] = [];
+
+    for (const url of urls) {
+      const request = this.http.get<EpisodeNoCha>(url).pipe(map((res) => [res]));
+      requests.push(request);
+    }
+
+    return forkJoin(requests).pipe(map((episodeArrays) => ([] as EpisodeNoCha[]).concat(...episodeArrays)));
   }
 
 }

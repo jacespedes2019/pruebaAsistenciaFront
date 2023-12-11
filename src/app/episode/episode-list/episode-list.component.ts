@@ -4,7 +4,6 @@ import { Character } from '../../character/character';
 import { MatPaginator } from '@angular/material/paginator';
 import { NgForm } from '@angular/forms';
 import { EpisodeNoCha } from '../episodeNoCharacters';
-import { Episode } from '../episode';
 import { EpisodeService } from '../episode.service';
 
 @Component({
@@ -15,7 +14,6 @@ import { EpisodeService } from '../episode.service';
 export class EpisodeListComponent implements OnInit {
 
   episodesNoCha: EpisodeNoCha[] = [];
-  episodes: Episode[] = [];
   paginatedEpisodes: EpisodeNoCha[] = [];
   searchTerm: string = '';
   
