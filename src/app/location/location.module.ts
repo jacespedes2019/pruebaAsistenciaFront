@@ -13,6 +13,12 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { LocationListComponent } from './location-list/location-list.component';
 import { LocationDetailComponent } from './location-detail/location-detail.component';
 
+/**
+ * LocationModule: Módulo que encapsula componentes y dependencias relacionadas con la visualización de ubicaciones.
+ *
+ * Este módulo incluye componentes para listar ubicaciones y mostrar detalles de una ubicación específica.
+ * También importa módulos de Angular Material y otros módulos personalizados necesarios para su funcionamiento.
+ */
 @NgModule({
   imports: [
     CommonModule,

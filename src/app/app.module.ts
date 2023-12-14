@@ -11,6 +11,10 @@ import { BarraModule } from './barra/barra.module';
 import { EpisodeModule } from './episode/episode.module';
 import { LocationModule } from './location/location.module';
 
+/**
+ * Módulo principal de la aplicación Angular.
+ * Configura y declara los componentes, módulos y servicios necesarios.
+ */
 @NgModule({
   declarations: [	
     AppComponent

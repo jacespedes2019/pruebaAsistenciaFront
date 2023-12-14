@@ -7,6 +7,9 @@ import { CharacterDetailComponent } from './character/character-detail/character
 import { LocationListComponent } from './location/location-list/location-list.component';
 import { LocationDetailComponent } from './location/location-detail/location-detail.component';
 
+/**
+ * Definición de las rutas de la aplicación.
+ */
 const routes: Routes = [
   {
     path:"",
@@ -54,6 +57,9 @@ const routes: Routes = [
   
 ];
 
+/**
+ * Módulo que configura las rutas de la aplicación.
+ */
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

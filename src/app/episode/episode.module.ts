@@ -13,6 +13,12 @@ import { BarraModule } from '../barra/barra.module';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { EpisodeDetailComponent } from './episode-detail/episode-detail.component';
 
+/**
+ * EpisodeModule: Módulo que encapsula componentes y dependencias relacionadas con la visualización de episodios.
+ *
+ * Este módulo incluye componentes para listar episodios y mostrar detalles de un episodio específico.
+ * También importa módulos de Angular Material y otros módulos personalizados necesarios para su funcionamiento.
+ */
 @NgModule({
   imports: [
     CommonModule,

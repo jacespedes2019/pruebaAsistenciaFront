@@ -12,6 +12,12 @@ import { MatInputModule } from '@angular/material/input';
 import { BarraModule } from '../barra/barra.module';
 import { CharacterDetailComponent } from './character-detail/character-detail.component';
 
+/**
+ * CharacterModule: Módulo que encapsula componentes y dependencias relacionadas con la visualización de personajes.
+ *
+ * Este módulo incluye componentes para listar personajes y mostrar detalles de un personaje específico.
+ * También importa módulos de Angular Material y otros módulos personalizados necesarios para su funcionamiento.
+ */
 @NgModule({
   imports: [
     CommonModule,
