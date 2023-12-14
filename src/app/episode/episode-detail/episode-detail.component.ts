@@ -11,69 +11,86 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './episode-detail.component.html',
   styleUrls: ['./episode-detail.component.sass']
 })
+/**
+ * Componente encargado de mostrar los detalles de un episodio en la interfaz de usuario.
+ * Muestra la información del episodio y la lista paginada de personajes asociados.
+ */
 export class EpisodeDetailComponent implements OnInit {
 
+  // Lista de personajes asociados al episodio y lista paginada de personajes
   characters: Character[] = [];
-  episodeNoCha!: EpisodeNoCha;
   paginatedCharacters: Character[] = [];
 
-  // Define el tamaño de la página y las opciones de tamaño de la página
-  pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 15];
+  // Detalles del episodio sin la lista de personajes
+  episodeNoCha!: EpisodeNoCha;
 
+  // Define el tamaño de la página y las opciones de tamaño de la página
+  pageSize = 10; // Tamaño de la página por defecto
+  pageSizeOptions: number[] = [5, 10, 15]; // Opciones de tamaño de página
+
+  // Referencia al paginador de Material
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
+  /**
+   * Constructor del componente.
+   * @param route Servicio que permite acceder a los parámetros de la ruta actual.
+   * @param episodeService Servicio que proporciona funciones para obtener detalles de episodios.
+   * @param characterService Servicio que proporciona funciones para obtener detalles de personajes.
+   */
   constructor(
     private route: ActivatedRoute,
     private episodeService: EpisodeService,
     private characterService: CharacterService
   ) {}
 
+  /**
+   * Método del ciclo de vida que se ejecuta al iniciar el componente.
+   * Obtiene el ID del episodio desde la ruta y llama al servicio para obtener detalles del episodio.
+   */
   ngOnInit(): void {
-    // Obtiene el ID del episodio desde la ruta
     const episodeId = this.route.snapshot.paramMap.get('id');
     
     if (episodeId) {
-      // Llama al servicio para obtener detalles del episodio
       this.episodeService.getEpisodeById(Number(episodeId)).subscribe((episodeNoCha) => {
         this.episodeNoCha = episodeNoCha;
-        // Obtén los personajes asociados al episodio
-        this.obtainCharacters();
-        this.paginateCharacters();
+        this.obtainCharacters(); // Obtener los personajes asociados al episodio
+        this.paginateCharacters(); // Paginar los personajes después de obtenerlos
       });
     }
   }
 
+  /**
+   * Método para obtener y mostrar la lista de personajes asociados al episodio.
+   * Utiliza el servicio de personajes para obtener los detalles de los personajes mediante sus URLs.
+   */
   obtainCharacters() {
     this.characterService.getCharactersByUrlList(this.episodeNoCha.characters).subscribe((data) => {
-    // Aquí, data es la lista de personajes obtenidos para el episodio actual
-    this.characters = data;
-      });
+      this.characters = data;
+    });
   }
 
+  /**
+   * Método para paginar la lista de personajes.
+   * Utiliza el paginador de Material para mostrar la cantidad deseada de personajes por página.
+   */
   paginateCharacters() {
     if (this.paginator && this.paginator.pageSize) {
-      console.log('Sirvio');
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       const endIndex = startIndex + this.paginator.pageSize;
-      console.log(this.paginator.pageIndex);
       this.paginatedCharacters = this.characters.slice(startIndex, endIndex);
-    }
-    else if (this.paginator) {
-      console.log('Sirvio');
+    } else if (this.paginator) {
       const startIndex = this.paginator.pageIndex * this.pageSize;
       const endIndex = startIndex + this.pageSize;
-      console.log(this.paginator.pageIndex);
       this.paginatedCharacters = this.characters.slice(startIndex, endIndex);
     }
   }
 
+  /**
+   * Método que se ejecuta al cambiar de página.
+   * Maneja los cambios de página actualizando la lista paginada de personajes.
+   * @param event Objeto que representa el evento de cambio de página.
+   */
   onPageChange(event: any) {
-    console.log('Entró 2');
-    // Maneja los cambios de página
     this.paginateCharacters();
   }
-
-
-
 }
