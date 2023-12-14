@@ -5,14 +5,28 @@ import { map, expand, pluck, toArray, concatMap  } from 'rxjs/operators';
 import { Character } from './character';
 import { of, forkJoin, mergeMap  } from 'rxjs';
 
+/**
+ * Servicio que gestiona la obtención de datos relacionados con personajes de la serie "Rick and Morty".
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class CharacterService {
+  /**
+   * URL base de la API para los personajes.
+   */
   private apiUrl = 'https://rickandmortyapi.com/api/character';
 
+  /**
+   * Constructor del servicio CharacterService.
+   * @param http Cliente HTTP utilizado para realizar las solicitudes.
+   */
   constructor(private http: HttpClient) {}
 
+  /**
+   * Obtiene la lista completa de personajes.
+   * @returns Observable que emite un array de personajes.
+   */
   getCharacters(): Observable<Character[]> {
     return this.http.get<{ info: { pages: number }; results: Character[] }>(this.apiUrl + '?page=1').pipe(
       map((data) => {
@@ -30,6 +44,12 @@ export class CharacterService {
     );
   }
 
+  
+  /**
+   * Obtiene personajes filtrados por un término de búsqueda.
+   * @param searchTerm Término de búsqueda.
+   * @returns Observable que emite un array de personajes filtrados.
+   */
   getFilteredCharacters(searchTerm: string): Observable<Character[]> {
     const url = searchTerm ? `${this.apiUrl}/?name=${searchTerm}` : this.apiUrl;
     if(searchTerm){
@@ -53,6 +73,11 @@ export class CharacterService {
     }
     }
 
+    /**
+   * Obtiene una lista de personajes a partir de una lista de URLs.
+   * @param urls Lista de URLs de personajes.
+   * @returns Observable que emite un array de personajes.
+   */
     getCharactersByUrlList(urls: string[]): Observable<Character[]> {
   
       const requests: Observable<Character[]>[] = [];
@@ -65,7 +90,11 @@ export class CharacterService {
       return forkJoin(requests).pipe(map((characterArrays) => ([] as Character[]).concat(...characterArrays)));
     }
 
-      // Método para obtener un episodio por ID desde la ruta
+    /**
+   * Obtiene un personaje por su ID.
+   * @param id ID del personaje.
+   * @returns Observable que emite el personaje específico.
+   */
     getCharacterById(id: number): Observable<Character> {
     // Hacer la solicitud HTTP para obtener el episodio específico
       return this.http.get<Character>(`${this.apiUrl}/${id}`);
