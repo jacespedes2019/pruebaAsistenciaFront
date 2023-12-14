@@ -1,4 +1,7 @@
+<!-- Barra de la aplicación -->
 <app-barra></app-barra>
+
+<!-- Detalles del episodio (mostrados si hay datos disponibles) -->
 <div class="episode-details" *ngIf="episodeNoCha">
   <h2>Episode name: {{ episodeNoCha.name }}</h2>
   <p><strong>Air Date:</strong> {{ episodeNoCha.air_date }}</p>
@@ -6,11 +9,12 @@
   <p><strong>Created:</strong> {{ episodeNoCha.created }}</p>
 </div>
 
+<!-- Sección de título para la lista de personajes -->
 <div class="title-section">
   <div class="section-title">Characters</div>
 </div>
 
-<!-- Contenedor flex para mostrar los personajes en línea -->
+<!-- Contenedor flex para mostrar las tarjetas de personajes en línea -->
 <div class="characters-container">
   <!-- Itera sobre los personajes y aplica el filtro si hay un término de búsqueda -->
   <mat-card *ngFor="let character of paginatedCharacters" class="character-card">
@@ -22,9 +26,10 @@
     <p><strong>Origin:</strong> {{ character.origin.name }}</p>
     <p><strong>Location:</strong> {{ character.location.name }}</p>
   </mat-card>
-
-  <!-- Agrega el paginador -->
 </div>
+
+<!-- Contenedor adicional para el paginador -->
 <div class="characters-container">
+  <!-- Agrega el paginador -->
   <mat-paginator [length]="characters.length" [pageSize]="pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="[5, 10, 15]" (page)="onPageChange($event)"></mat-paginator>
 </div>

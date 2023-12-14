@@ -1,4 +1,7 @@
+<!-- Barra de la aplicación -->
 <app-barra></app-barra>
+
+<!-- Detalles de la ubicación -->
 <div class="location-details" *ngIf="location">
   <h2>Location name: {{ location.name }}</h2>
   <p><strong>Type:</strong> {{ location.type }}</p>
@@ -6,6 +9,7 @@
   <p><strong>Created:</strong> {{ location.created }}</p>
 </div>
 
+<!-- Sección de título para los residentes -->
 <div class="title-section">
   <div class="section-title">Residents</div>
 </div>
@@ -21,10 +25,11 @@
     <p><strong>Gender:</strong> {{ character.gender }}</p>
     <p><strong>Origin:</strong> {{ character.origin.name }}</p>
     <p><strong>Location:</strong> {{ character.location.name }}</p>
-  </mat-card>
-
-  <!-- Agrega el paginador -->
+  </mat-card>  
 </div>
+
+<!-- Contenedor adicional para el paginador -->
 <div class="characters-container">
+  <!-- Agrega el paginador -->
   <mat-paginator [length]="characters.length" [pageSize]="pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="[5, 10, 15]" (page)="onPageChange($event)"></mat-paginator>
 </div>

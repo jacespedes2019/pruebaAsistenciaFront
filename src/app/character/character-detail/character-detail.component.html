@@ -1,45 +1,61 @@
+<!-- Barra de la aplicación -->
 <app-barra></app-barra>
+
+<!-- Nombre del personaje (visible si hay un personaje seleccionado) -->
 <h2 class="character-name" *ngIf="character">{{ character.name }}</h2>
+
+<!-- Detalles del personaje (visible si hay un personaje seleccionado) -->
 <div class="character-details" *ngIf="character">
+  <!-- Imagen del personaje -->
   <img [src]="character.image" alt="{{ character.name }}" class="character-image">
 
+  <!-- Sección de detalles del personaje -->
   <div class="details-section">
+    <!-- Propiedades del personaje -->
     <p><strong>Status:</strong> {{ character.status }}</p>
     <p><strong>Species:</strong> {{ character.species }}</p>
     <p><strong>Type:</strong> {{ character.type }}</p>
     <p><strong>Gender:</strong> {{ character.gender }}</p>
+    <!-- Enlaces a las ubicaciones de origen y actual del personaje -->
     <p><strong>Origin:</strong> <a [href]="'/location/' + getLocationId(character.origin.url)">{{ character.origin.name }}</a></p>
     <p><strong>Location:</strong> <a [href]="'/location/' + getLocationId(character.location.url)">{{ character.location.name }}</a></p>
+    <!-- Información sobre la creación del personaje -->
     <p class="created-info">Created: {{ character.created }}</p>
     <!-- Agrega otras propiedades según sea necesario -->
   </div>
 </div>
 
+<!-- Sección de título para la lista de episodios -->
 <div class="title-section">
   <div class="section-title">Episodes</div>
 </div>
 
-<!-- Contenedor flex para mostrar los personajes en línea -->
+<!-- Contenedor flex para mostrar las tarjetas de episodios en línea -->
 <div class="episodes-container">
-  <!-- Itera sobre los personajes y aplica el filtro si hay un término de búsqueda -->
+  <!-- Itera sobre los episodios y aplica el filtro si hay un término de búsqueda -->
   <mat-card *ngFor="let episode of paginatedEpisodes" class="episode-card">
+    <!-- Enlace al detalle del episodio -->
     <h2><a [href]="'/episode/' + episode.id">{{ episode.name }}</a></h2>
+    <!-- Propiedades del episodio -->
     <p><strong>Air date:</strong> {{ episode.air_date }}</p>
     <p><strong>Episode number:</strong> {{ episode.episode }}</p>
     <p><strong>Created:</strong> {{ episode.created }}</p>
     
-    <!-- Resto de las propiedades
+    <!-- Resto de las propiedades (comentadas para completar) -->
 
+    <!-- Descomenta y ajusta según sea necesario
     <h3>Characters:</h3>
     <select>
       <option *ngFor="let character of episode.characters" [value]="episode">
-        {{ character.name}}
+        {{ character.name }}
       </option>
-    </select>  -->
+    </select>
+    -->
   </mat-card>
-
 </div>
+
+<!-- Contenedor adicional para el paginador -->
 <div class="episodes-container">
- <!-- Agrega el paginador -->
+  <!-- Agrega el paginador -->
   <mat-paginator [length]="episodes.length" [pageSize]="pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="[25, 50, 100]" (page)="onPageChange($event)"></mat-paginator>
 </div>

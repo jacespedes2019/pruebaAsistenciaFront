@@ -1,43 +1,55 @@
+<!-- Barra de la aplicación -->
 <app-barra></app-barra>
+
+<!-- Sección de título para la lista de personajes -->
 <div class="title-section">
   <div class="section-title">Characters</div>
   <div class="form-container">
+    <!-- Formulario de búsqueda -->
     <form #searchForm="ngForm" class="search-form">
       <mat-form-field class="search-field">
         <mat-label>Search by name</mat-label>
         <input matInput [(ngModel)]="searchTerm" [ngModelOptions]="{standalone: true}">
       </mat-form-field>
+      <!-- Botones de acción para búsqueda y reinicio -->
       <button mat-raised-button color="primary" class="action-button" (click)="search()">Search</button>
       <button mat-raised-button color="warn" class="action-button" (click)="resetForm(searchForm)">Reset</button>
     </form>
   </div>
 </div>
 
-<!-- Contenedor flex para mostrar los personajes en línea -->
+<!-- Contenedor flex para mostrar las tarjetas de personajes en línea -->
 <div class="characters-container">
   <!-- Itera sobre los personajes y aplica el filtro si hay un término de búsqueda -->
   <mat-card *ngFor="let character of paginatedCharacters" class="character-card">
+    <!-- Imagen del personaje -->
     <img [src]="character.image" alt="{{ character.name }}" class="character-image">
+    <!-- Nombre del personaje con enlace a su detalle -->
     <h2 class="title-card"><a [href]="'/character/' + character.id">{{ character.name }}</a></h2>
+    <!-- Propiedades del personaje -->
     <p><strong>Status:</strong> {{ character.status }}</p>
     <p><strong>Species:</strong> {{ character.species }}</p>
     <p><strong>Gender:</strong> {{ character.gender }}</p>
     <p><strong>Origin:</strong> {{ character.origin.name }}</p>
     <p><strong>Location:</strong> {{ character.location.name }}</p>
     
-    <!-- Resto de las propiedades 
+    <!-- Resto de las propiedades (comentadas para completar) -->
 
+    <!-- Descomenta y ajusta según sea necesario
     <h3>Episodes:</h3>
     <select>
       <option *ngFor="let episode of character.episode" [value]="episode">
         Episode Link {{ episode.split('/').pop() }}
       </option>
-    </select> -->
+    </select>
+    -->
   </mat-card>
 
   <!-- Agrega el paginador -->
 </div>
 
+<!-- Contenedor adicional para el paginador -->
 <div class="characters-container">
+  <!-- Agrega el paginador -->
   <mat-paginator [length]="characters.length" [pageSize]="pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="[25, 50, 100]" (page)="onPageChange($event)"></mat-paginator>
 </div>
