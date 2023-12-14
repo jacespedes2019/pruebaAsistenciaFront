@@ -1,4 +1,7 @@
+<!-- Barra de la aplicación -->
 <app-barra></app-barra>
+
+<!-- Sección de título y formulario de búsqueda -->
 <div class="title-section">
   <div class="section-title">Locations</div>
   <div class="form-container">
@@ -13,28 +16,31 @@
   </div>
 </div>
 
-<!-- Contenedor flex para mostrar los personajes en línea -->
+<!-- Contenedor flex para mostrar las ubicaciones en línea -->
 <div class="locations-container">
-  <!-- Itera sobre los personajes y aplica el filtro si hay un término de búsqueda -->
+  <!-- Itera sobre las ubicaciones y aplica el filtro si hay un término de búsqueda -->
   <mat-card *ngFor="let location of paginatedLocations" class="location-card">
     <h2><a [href]="'/location/' + location.id">{{ location.name }}</a></h2>
     <p><strong>Type:</strong> {{ location.type }}</p>
     <p><strong>Dimension:</strong> {{ location.dimension }}</p>
     <p><strong>Created:</strong> {{ location.created }}</p>
     
-    <!-- Resto de las propiedades
+    <!-- Resto de las propiedades -->
 
+    <!-- Ejemplo de sección de personajes (comentada) -->
+    <!-- 
     <h3>Characters:</h3>
     <select>
       <option *ngFor="let character of location.characters" [value]="location">
         {{ character.name}}
       </option>
-    </select>  -->
+    </select>  
+    -->
   </mat-card>
-
 </div>
+
+<!-- Contenedor adicional para el paginador -->
 <div class="locations-container">
- <!-- Agrega el paginador -->
+  <!-- Agrega el paginador -->
   <mat-paginator [length]="locations.length" [pageSize]="pageSize" [showFirstLastButtons]="true" [pageSizeOptions]="[25, 50, 100]" (page)="onPageChange($event)"></mat-paginator>
 </div>
-
